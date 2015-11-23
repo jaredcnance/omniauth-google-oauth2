@@ -70,7 +70,7 @@ module OmniAuth
         r_body = JSON.parse( request.body.read ) if request.xhr?
         puts request.body.read
         puts request.xhr
-        if request.xhr? && r_body["code"]
+        if r_body["code"]
           verifier = r_body["code"]
           client.auth_code.get_token(verifier, { :redirect_uri => 'postmessage'}.merge(token_params.to_hash(:symbolize_keys => true)),
                                      deep_symbolize(options.auth_token_params || {}))
