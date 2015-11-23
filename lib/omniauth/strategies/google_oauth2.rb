@@ -67,7 +67,7 @@ module OmniAuth
       end
 
       def custom_build_access_token
-        r_body = JSON.parse( request.body.read ) if request.xhr?
+        r_body = JSON.parse( request.body.read )
         puts request.body.read
         puts r_body
         if r_body["code"]
