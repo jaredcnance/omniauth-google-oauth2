@@ -72,7 +72,7 @@ module OmniAuth
         puts r_body
         if r_body["code"]
           verifier = r_body["code"]
-          client.auth_code.get_token(verifier, { :redirect_uri => 'postmessage'}.merge(token_params.to_hash(:symbolize_keys => true)),
+          client.auth_code.get_token(verifier, { :redirect_uri => 'http://localhost:3000/auth/google_oauth2/callback'}.merge(token_params.to_hash(:symbolize_keys => true)),
                                      deep_symbolize(options.auth_token_params || {}))
         elsif verify_token(r_body['id_token'], r_body['access_token'])
           ::OAuth2::AccessToken.from_hash(client, request.params.dup)
