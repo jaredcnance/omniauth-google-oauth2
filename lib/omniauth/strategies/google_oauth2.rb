@@ -68,11 +68,10 @@ module OmniAuth
 
       def custom_build_access_token
         r_body = JSON.parse( request.body.read )
-        puts request.body.read
-        puts r_body
         if r_body["code"]
+          redirect_uri = request.params['redirect_uri']
           verifier = r_body["code"]
-          client.auth_code.get_token(verifier, { :redirect_uri => 'http://localhost:4200/s'}.merge(token_params.to_hash(:symbolize_keys => true)),
+          client.auth_code.get_token(verifier, { :redirect_uri => redirect_uri }.merge(token_params.to_hash(:symbolize_keys => true)),
                                      deep_symbolize(options.auth_token_params || {}))
         elsif verify_token(r_body['id_token'], r_body['access_token'])
           ::OAuth2::AccessToken.from_hash(client, request.params.dup)
