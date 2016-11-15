@@ -68,6 +68,7 @@ module OmniAuth
 
       def custom_build_access_token
         r_body = JSON.parse( request.body.read )
+        puts r_body.to_json
         if r_body["code"]
           redirect_uri = r_body['redirect_uri']
           verifier = r_body["code"]
