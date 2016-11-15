@@ -69,7 +69,7 @@ module OmniAuth
       def custom_build_access_token
         r_body = JSON.parse( request.body.read )
         if r_body["code"]
-          redirect_uri = request.params['redirect_uri']
+          redirect_uri = r_body['redirect_uri']
           verifier = r_body["code"]
           client.auth_code.get_token(verifier, { :redirect_uri => redirect_uri }.merge(token_params.to_hash(:symbolize_keys => true)),
                                      deep_symbolize(options.auth_token_params || {}))
